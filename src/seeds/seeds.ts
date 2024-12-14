@@ -1,48 +1,45 @@
-import { PrismaClient } from '@prisma/client';
+import mongoose from 'mongoose';
+import user from '../models/user';
+import thought from '../models/thought';
 
-const prisma = new PrismaClient();
+// Connect to MongoDB
+const mongoURI = 'mongodb://localhost:27017/SocialNetwork';
 
-async function main() {
-    // Create some users
-    const user1 = await prisma.user.create({
-        data: {
-            name: 'Alice',
-            email: 'alice@example.com',
-        },
-    });
+mongoose.connect(mongoURI)
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.log(err));
 
-    const user2 = await prisma.user.create({
-        data: {
-            name: 'Bob',
-            email: 'bob@example.com',
-        },
-    });
+// Create seed data
+const users = [
+    {
+        name: 'John Doe',
+        email: 'email',
+        password: 'password',
+    },
 
-    // Create some posts
-    const post1 = await prisma.post.create({
-        data: {
-            title: 'Hello World',
-            content: 'This is my first post!',
-            authorId: user1.id,
-        },
-    });
+    {
+        name: 'Jane Doe',
+        email: 'email',
+        password: 'password',
+    },
+];
 
-    const post2 = await prisma.post.create({
-        data: {
-            title: 'Another Post',
-            content: 'This is another post.',
-            authorId: user2.id,
-        },
-    });
+const thoughts = [
+    {
+        user: 'John Doe',
+        text: 'Hello, world!',
+    },
+];
 
-    console.log({ user1, user2, post1, post2 });
-}
+// Insert seed data
+user.insertMany(users)
+    .then(() => console.log('Users added'))
+    .catch(err => console.log(err));
 
-main()
-    .catch((e) => {
-        console.error(e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    });
+thought.insertMany(thoughts)
+
+    .then(() => console.log('Thoughts added'))
+    .catch(err => console.log(err));
+
+// Disconnect
+mongoose.disconnect();
