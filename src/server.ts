@@ -1,8 +1,13 @@
-import user from '../src/models/user.js';
-import post from '../src/models/thought.js';
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import router from './routes/index.js';
+import userRoutes from './routes/api/userRoutes.js';
+import thoughtRoutes from './routes/api/thoughtRoutes.js';
+router.use('/user', userRoutes);
+router.use('/thought', thoughtRoutes);
+
+
 dotenv.config();
 
 const app = express();
@@ -10,7 +15,6 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-import router from './routes/index.js';
 app.use(router);
 
 // Connect to MongoDB
@@ -25,6 +29,7 @@ mongoose.connect(mongoUri)
     .catch((err: unknown) => {
         console.error('Failed to connect to MongoDB:', err);
     });
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
