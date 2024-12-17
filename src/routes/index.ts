@@ -1,6 +1,6 @@
 import express from 'express';
 import userRoutes from './api/userRoutes';
-import postRoutes from './api/thoughtsRoutes';
+import postRoutes from './api/thoughtRoutes';
 
 const router = express.Router();
 

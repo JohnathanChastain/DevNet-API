@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import Reaction from '../models/reaction';
 import Thought from '../models/thought';
 
-// Add a reaction to a thought
+// Add reaction to a thought
 export const addReaction = async (req: Request, res: Response) => {
     try {
         const { thoughtId } = req.params;
@@ -18,7 +18,7 @@ export const addReaction = async (req: Request, res: Response) => {
     }
 };
 
-// Remove a reaction from a thought
+// Remove reaction from a thought
 export const removeReaction = async (req: Request, res: Response) => {
     try {
         const { thoughtId, reactionId } = req.params;

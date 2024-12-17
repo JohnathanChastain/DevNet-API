@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import user from '../models/user';
-import thought from '../models/thought';
+import user from '../models/user.js';
+import thought from '../models/thought.js';
 
 // Connect to MongoDB
 const mongoURI = 'mongodb://localhost:27017/SocialNetwork';
