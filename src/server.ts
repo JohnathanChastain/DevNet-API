@@ -1,3 +1,5 @@
+import user from '../src/models/user.js';
+import post from '../src/models/thought.js';
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
@@ -8,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-import router from './routes/index';
+import router from './routes/index.js';
 app.use(router);
 
 // Connect to MongoDB
